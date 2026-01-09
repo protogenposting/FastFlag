@@ -56,10 +56,10 @@ func install(args []string) {
 	cmd := exec.Command("emerge", "-av", packages)
 	stdout, err := cmd.Output()
 
+	fmt.Println(string(stdout))
+
 	if err != nil {
 		fmt.Println(err.Error())
 		return
 	}
-
-	fmt.Println(string(stdout))
 }
