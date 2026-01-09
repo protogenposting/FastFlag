@@ -53,8 +53,8 @@ func install(args []string) {
 
 	fmt.Println("running emerge -av --pretend " + packages)
 
-	var args string = "emerge -av --pretend " + packages
-	cmd := exec.Command("emerge", strings.Split(args, " ")...)
+	var portageArgs string = "emerge -av --pretend " + packages
+	cmd := exec.Command("emerge", strings.Split(portageArgs, " ")...)
 
 	stderr, _ := cmd.StderrPipe()
 	cmd.Start()
