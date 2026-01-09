@@ -62,7 +62,7 @@ func install(args []string) {
 	cmd.Start()
 
 	scanner := bufio.NewScanner(stderr)
-	scanner.Split(bufio.ScanWords)
+	scanner.Split(bufio.ScanLines)
 	for scanner.Scan() {
 		m := scanner.Text()
 		fmt.Print(m)
