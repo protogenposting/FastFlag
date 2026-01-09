@@ -53,13 +53,17 @@ func install(args []string) {
 
 	fmt.Println("running emerge -av --pretend " + packages)
 
-	cmd := exec.Command("emerge", "-av --pretend " + packages)
-	stdout, err := cmd.Output()
+	args := "emerge -av --pretend " + packages
+	cmd := exec.Command("emerge", strings.Split(args, " ")...)
 
-	fmt.Println(string(stdout))
+	stderr, _ := cmd.StderrPipe()
+	cmd.Start()
 
-	if err != nil {
-		fmt.Println(err.Error())
-		return
+	scanner := bufio.NewScanner(stderr)
+	scanner.Split(bufio.ScanWords)
+	for scanner.Scan() {
+		m := scanner.Text()
+		fmt.Println(m)
 	}
+	cmd.Wait()
 }
