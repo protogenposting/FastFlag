@@ -51,9 +51,9 @@ func install(args []string) {
 		packages = packages + arg
 	}
 
-	fmt.Println("running emerge -av --pretend" + packages)
+	fmt.Println("running emerge -av --pretend " + packages)
 
-	cmd := exec.Command("emerge -av " + packages)
+	cmd := exec.Command("emerge -av --pretend " + packages)
 	stdout, err := cmd.Output()
 
 	fmt.Println(string(stdout))
